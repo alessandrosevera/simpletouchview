@@ -1,0 +1,38 @@
+<Project Sdk="MSBuild.Sdk.Extras/3.0.44">
+
+  <PropertyGroup>
+    <TargetFrameworks>netstandard1.0;netstandard2.0;MonoAndroid10.0;Xamarin.iOS10;</TargetFrameworks>
+
+    <NeutralLanguage>en</NeutralLanguage>
+    <LangVersion>default</LangVersion>
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+    <DebugType>portable</DebugType>
+    <DefineConstants>$(DefineConstants);</DefineConstants>
+
+
+    <!--When built in 2019 will remove extra references on pack-->
+    <DisableExtraReferences>false</DisableExtraReferences>
+  </PropertyGroup>
+
+  
+  <ItemGroup>
+    <PackageReference Include="Xamarin.Forms" Version="5.0.0.2337" />
+    <Compile Include="**\Shared\*.cs" />
+  </ItemGroup>
+
+  <ItemGroup Condition=" $(TargetFramework.StartsWith('MonoAndroid')) ">
+    <PackageReference Include="Xamarin.AndroidX.Core" Version="1.6.0.1" />
+    <Compile Include="**\Android\*.cs" />
+  </ItemGroup>
+
+  <ItemGroup Condition=" $(TargetFramework.StartsWith('Xamarin.iOS')) ">
+    <Reference Include="Xamarin.iOS" />
+    <Compile Include="**\iOS\*.cs" />
+  </ItemGroup>
+ 
+  <ItemGroup>
+    <Compile Update="Shared\TouchViewEventArgs.cs">
+      <SubType></SubType>
+    </Compile>
+  </ItemGroup>
+</Project>
