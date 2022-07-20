@@ -16,7 +16,7 @@
 
   
   <ItemGroup>
-    <PackageReference Include="Xamarin.Forms" Version="5.0.0.2337" />
+    <PackageReference Include="Xamarin.Forms" Version="5.0.0.2291" />
     <Compile Include="**\Shared\*.cs" />
   </ItemGroup>
 
@@ -29,10 +29,5 @@
     <Reference Include="Xamarin.iOS" />
     <Compile Include="**\iOS\*.cs" />
   </ItemGroup>
- 
-  <ItemGroup>
-    <Compile Update="Shared\TouchViewEventArgs.cs">
-      <SubType></SubType>
-    </Compile>
-  </ItemGroup>
+
 </Project>

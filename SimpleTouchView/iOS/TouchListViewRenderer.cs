@@ -6,14 +6,14 @@ using UIKit;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.iOS;
 
-[assembly: ExportRenderer(typeof(TouchView), typeof(TouchViewRenderer))]
+[assembly: ExportRenderer(typeof(TouchListView), typeof(TouchListViewRenderer))]
 namespace SimpleTouchView.iOS
 {
-    public class TouchViewRenderer : VisualElementRenderer<TouchView>
+    public class TouchListViewRenderer : ListViewRenderer
     {
         #region auto-properties
 
-        private TouchView FormsElement { get; set; }
+        private TouchListView FormsElement { get; set; }
 
         #endregion
 
@@ -25,8 +25,8 @@ namespace SimpleTouchView.iOS
 		public static void Initialize()
         {
 #pragma warning disable 0219
-            var ignore1 = typeof(TouchViewRenderer);
-            var ignore2 = typeof(TouchView);
+            var ignore1 = typeof(TouchListViewRenderer);
+            var ignore2 = typeof(TouchListView);
 #pragma warning restore 0219
         }
 
@@ -34,18 +34,27 @@ namespace SimpleTouchView.iOS
 
         #region overrides
 
-        protected override void OnElementChanged(ElementChangedEventArgs<TouchView> e)
+        public override void MotionBegan(UIEventSubtype motion, UIEvent evt)
         {
-            if (!(e.OldElement is null))
+            base.MotionBegan(motion, evt);
+        }
+        public override void PressesBegan(NSSet<UIPress> presses, UIPressesEvent evt)
+        {
+            base.PressesBegan(presses, evt);
+        }
+
+        protected override void OnElementChanged(ElementChangedEventArgs<ListView> e)
+        {
+            if (!(e.OldElement is null) && e.OldElement is IDisposable disposableOldElement)
             {
-                e.OldElement.Dispose();
+                disposableOldElement.Dispose();
             }
 
-            if (!(e.NewElement is null))
+            if (!(e.NewElement is null) && e.NewElement is TouchListView touchListView)
             {
-                FormsElement = e.NewElement;
+                FormsElement = touchListView;
             }
-           
+
             base.OnElementChanged(e);
 
             bool xx = IsFirstResponder;
@@ -53,34 +62,16 @@ namespace SimpleTouchView.iOS
             bool dd = BecomeFirstResponder();
             bool xx2 = IsFirstResponder;
             bool ff = CanResignFirstResponder;
-            //bool gg = ResignFirstResponder();
+            bool gg = ResignFirstResponder();
             bool xx3 = IsFirstResponder;
-            
             long h = 0;
-        }
-
-        // public override bool IsFirstResponder => true;
-
-        public override bool CanBecomeFirstResponder => true;
-        public override bool CanResignFirstResponder => true;
-
-        public override bool BecomeFirstResponder()
-        {
-            bool origValue = base.BecomeFirstResponder();
-            return origValue;
-        }
-
-        public override bool ResignFirstResponder()
-        {
-            bool origValue = base.ResignFirstResponder();
-            return origValue;
         }
 
         public override void TouchesBegan(NSSet touches, UIEvent evt)
         {
             if (touches.Count > 0)
             {
-                
+
                 var touch = touches.ToArray<UITouch>()[0];
                 var locationInView = touch.LocationInView(this);
 

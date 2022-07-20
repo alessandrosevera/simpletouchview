@@ -3,9 +3,8 @@ using Xamarin.Forms;
 
 namespace SimpleTouchView
 {
-    public class TouchView : AbsoluteLayout, IDisposable
+    public class TouchListView : ListView, IDisposable
     {
-
         #region event handlers
 
         public event EventHandler<TouchViewEventArgs> Up;
@@ -17,7 +16,7 @@ namespace SimpleTouchView
 
         #region ctor(s)
 
-        public TouchView()
+        public TouchListView()
         {
         }
 

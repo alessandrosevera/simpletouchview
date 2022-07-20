@@ -6,20 +6,20 @@ using SimpleTouchView;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
 
-[assembly: ExportRenderer(typeof(TouchView), typeof(TouchViewRenderer))]
+[assembly: ExportRenderer(typeof(TouchListView), typeof(TouchListViewRenderer))]
 namespace SimpleTouchView.Droid
 {
-    public class TouchViewRenderer : VisualElementRenderer<TouchView>, Android.Views.View.IOnTouchListener
+    public class TouchListViewRenderer : VisualElementRenderer<TouchListView>, Android.Views.View.IOnTouchListener
     {
         #region auto-properties
 
-        private TouchView FormsElement { get; set; }
+        private TouchListView FormsElement { get; set; }
 
         #endregion
 
         #region ctor(s)
 
-        public TouchViewRenderer(Context context) : base(context)
+        public TouchListViewRenderer(Context context) : base(context)
         {
         }
 
@@ -33,8 +33,8 @@ namespace SimpleTouchView.Droid
 		public static void Initialize()
         {
 #pragma warning disable 0219
-            var ignore1 = typeof(TouchViewRenderer);
-            var ignore2 = typeof(TouchView);
+            var ignore1 = typeof(TouchListViewRenderer);
+            var ignore2 = typeof(TouchListView);
 #pragma warning restore 0219
         }
 
@@ -42,7 +42,7 @@ namespace SimpleTouchView.Droid
 
         #region overrides
 
-        protected override void OnElementChanged(ElementChangedEventArgs<TouchView> e)
+        protected override void OnElementChanged(ElementChangedEventArgs<TouchListView> e)
         {
             if (!(e.OldElement is null))
             {
