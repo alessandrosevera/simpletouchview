@@ -54,17 +54,6 @@ namespace SimpleTouchView.iOS
             {
                 FormsElement = touchListView;
             }
-
-            base.OnElementChanged(e);
-
-            bool xx = IsFirstResponder;
-            bool cc = CanBecomeFirstResponder;
-            bool dd = BecomeFirstResponder();
-            bool xx2 = IsFirstResponder;
-            bool ff = CanResignFirstResponder;
-            bool gg = ResignFirstResponder();
-            bool xx3 = IsFirstResponder;
-            long h = 0;
         }
 
         public override void TouchesBegan(NSSet touches, UIEvent evt)
