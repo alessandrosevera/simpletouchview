@@ -1,7 +1,7 @@
 <Project Sdk="MSBuild.Sdk.Extras/3.0.44">
 
   <PropertyGroup>
-    <TargetFrameworks>netstandard1.0;netstandard2.0;MonoAndroid10.0;Xamarin.iOS10;</TargetFrameworks>
+    <TargetFrameworks>netstandard1.0;netstandard2.0;MonoAndroid12.0;Xamarin.iOS10;</TargetFrameworks>
 
     <NeutralLanguage>en</NeutralLanguage>
     <LangVersion>default</LangVersion>
@@ -9,19 +9,62 @@
     <DebugType>portable</DebugType>
     <DefineConstants>$(DefineConstants);</DefineConstants>
 
+    <AssemblyName>SimpleTouchView</AssemblyName>
+    <RootNamespace>SimpleTouchView</RootNamespace>
+    <Product>$(AssemblyName) ($(TargetFramework))</Product>
+    <AssemblyVersion>1.0.0</AssemblyVersion>
+    <AssemblyFileVersion>1.0.0</AssemblyFileVersion>
+    <Version>1.0.0</Version>
+    <Authors>Alessandro Severa</Authors>
+    <PackageId>SimpleTouchView</PackageId>
+    <PackOnBuild>true</PackOnBuild>
+    <!--<PackageIconUrl>http://www.refractored.com/images/plugin_icon_media.png</PackageIconUrl>-->
+    <!--<PackageLicenseUrl>https://github.com/alessandrosevera/simpletouchview/blob/master/LICENSE</PackageLicenseUrl>-->
+    <Owners>alessandrosevera</Owners>
+    <PackageProjectUrl>https://github.com/alessandrosevera/simpletouchview</PackageProjectUrl>
+    <Summary>Adds a layout on which it is possible to handle events such as: up, down, panning and panned.</Summary>
+    <PackageTags>xamarin, pcl, touch, view, up, down, panning, panned</PackageTags>
+    <Title>Plugin for Xamarin</Title>
+    <Description>
+      Adds a layout on which it is possible to handle events such as: up, down, panning and panned.
+    </Description>
+    <Copyright>Copyright 2023</Copyright>
+    <RepositoryUrl>https://github.com/alessandrosevera/simpletouchview</RepositoryUrl>
+    <PackageReleaseNotes>See: https://github.com/alessandrosevera/simpletouchview/releases </PackageReleaseNotes>
+    <NeutralLanguage>en</NeutralLanguage>
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+    <LangVersion>latest</LangVersion>
 
     <!--When built in 2019 will remove extra references on pack-->
     <DisableExtraReferences>false</DisableExtraReferences>
   </PropertyGroup>
 
+  <PropertyGroup Condition=" '$(Configuration)'=='Debug' ">
+    <DebugSymbols>true</DebugSymbols>
+    <GenerateDocumentationFile>false</GenerateDocumentationFile>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(Configuration)'=='Release' ">
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <!-- sourcelink: Declare that the Repository URL can be published to NuSpec -->
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <!-- sourcelink: Embed source files that are not tracked by the source control manager to the PDB -->
+    <EmbedUntrackedSources>true</EmbedUntrackedSources>
+    <!-- sourcelink: Include PDB in the built .nupkg -->
+    <AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
+  </PropertyGroup>
+
+  <ItemGroup Condition=" '$(Configuration)'=='Release' ">
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1" PrivateAssets="All" />
+  </ItemGroup>
   
   <ItemGroup>
-    <PackageReference Include="Xamarin.Forms" Version="5.0.0.2545" />
+    <PackageReference Include="Xamarin.Forms" Version="5.0.0.2578" />
     <Compile Include="**\Shared\*.cs" />
   </ItemGroup>
 
   <ItemGroup Condition=" $(TargetFramework.StartsWith('MonoAndroid')) ">
-    <PackageReference Include="Xamarin.AndroidX.Core" Version="1.6.0.1" />
+    <PackageReference Include="Xamarin.AndroidX.Core" Version="1.9.0.2" />
     <Compile Include="**\Android\*.cs" />
   </ItemGroup>
 
